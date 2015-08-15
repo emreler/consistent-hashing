@@ -1,5 +1,5 @@
 require('should');
-var ConsistentHashing = require('../lib');
+var ConsistentHashing = require('../');
 
 describe('Consistent Hashing', function () {
   var nodeNames = ['node1', 'node2', 'node3', 'node4', 'node5', 'node6'];

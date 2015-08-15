@@ -9,7 +9,6 @@ var ConsistentHashing = function(nodeNames, replicaCount) {
   this.nodes = {};
   var _this = this;
   nodeNames.forEach(function(nodeName) {
-    _this.nodes[nodeName] = {};
     _this.addNode(nodeName, replicaCount);
   });
 };
@@ -34,6 +33,7 @@ ConsistentHashing.prototype.set = function(key, value) {
   if (!nodeName) {
     throw new Error('Node not found.');
   }
+
   this.nodes[nodeName][key] = value;
 };
 
@@ -43,6 +43,7 @@ ConsistentHashing.prototype.get = function(key) {
 };
 
 ConsistentHashing.prototype.addNode = function(nodeName) {
+  this.nodes[nodeName] = {};
   for (var i = 0; i < this.replicaCount; i++) {
     var key = nodeName + '-' + i;
     var pos = this.getPosition(this.getHash(key));
@@ -61,12 +62,13 @@ ConsistentHashing.prototype.removeNode = function(nodeName) {
       console.log(key, pos);
       throw new Error('Node replica does not exist.');
     }
+
     delete this.ring[pos];
   }
 
   // store node's existing (key, value) pairs on the ring again
-  for(var k in this.nodes[nodeName]) {
-    if(this.nodes[nodeName].hasOwnProperty(k)) {
+  for (var k in this.nodes[nodeName]) {
+    if (this.nodes[nodeName].hasOwnProperty(k)) {
       this.set(k, this.nodes[nodeName][k]);
     }
   }
