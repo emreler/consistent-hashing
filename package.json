@@ -1,0 +1,23 @@
+{
+  "name": "consistent-hashing",
+  "version": "0.0.1",
+  "description": "This is a simple JavaScript implementation of consistent hashing. See https://en.wikipedia.org/wiki/Consistent_hashing for more info.",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emreler/consistent-hashing.git"
+  },
+  "keywords": [
+    "hashing"
+  ],
+  "author": "Emre Kayan",
+  "license": "MIT",
+  "homepage": "https://github.com/emreler/consistent-hashing",
+  "devDependencies": {
+    "mocha": "^2.2.5",
+    "should": "^7.0.4"
+  }
+}
