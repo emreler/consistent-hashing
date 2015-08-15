@@ -1,0 +1,8 @@
+{
+  "unused": true,
+  "node": true,
+  "camelcase": true,
+  "forin": true,
+  "newcap": true,
+  "quotmark": "single"
+}
