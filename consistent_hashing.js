@@ -58,8 +58,6 @@ ConsistentHashing.prototype.removeNode = function(nodeName) {
     var pos = this.getPosition(this.getHash(key));
 
     if (!this.ring.hasOwnProperty(pos)) {
-      console.log(this.ring);
-      console.log(key, pos);
       throw new Error('Node replica does not exist.');
     }
 
