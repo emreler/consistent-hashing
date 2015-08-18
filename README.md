@@ -5,7 +5,7 @@ This is a simple JavaScript implementation of consistent hashing. See the [Wiki 
 ## Usage
 
 ```javascript
-var ConsistentHashing = require('./');
+var ConsistentHashing = require('./consistent_hashing');
 
 var nodeNames = ['node1', 'node2', 'node3', 'node4', 'node5', 'node6'];
 var replicaCount = 100;
