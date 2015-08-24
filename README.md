@@ -2,6 +2,11 @@
 
 This is a simple JavaScript implementation of consistent hashing. See the [Wiki page](https://en.wikipedia.org/wiki/Consistent_hashing) for more info on consistent hashing.
 
+## Installation
+
+Install dependencies using:
+
+``` $ npm install ```
 ## Usage
 
 ```javascript
@@ -29,3 +34,12 @@ cons.removeNode('node1');
 console.log(cons.nodes);
 
 ```
+
+You can run the example above using:
+
+``` $ node example.js ```
+## Test
+
+Tests are written with Mocha. Run tests using:
+
+``` $ mocha ```
