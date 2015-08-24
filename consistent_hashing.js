@@ -9,12 +9,12 @@ var ConsistentHashing = function(nodeNames, replicaCount) {
   this.nodes = {};
   var _this = this;
   nodeNames.forEach(function(nodeName) {
-    _this.addNode(nodeName, replicaCount);
+    _this.addNode(nodeName);
   });
 };
 
 ConsistentHashing.prototype.findClosestNode = function(key) {
-  var pos = this.getPosition(this.getHash(key));
+  var pos = this.getPosition(key);
   var ringPositions = Object.keys(this.ring).map(function(f) {return parseFloat(f);}).sort();
 
   // Store the new (key, value) in the appropriate position on the ring
@@ -46,7 +46,7 @@ ConsistentHashing.prototype.addNode = function(nodeName) {
   this.nodes[nodeName] = {};
   for (var i = 0; i < this.replicaCount; i++) {
     var key = nodeName + '-' + i;
-    var pos = this.getPosition(this.getHash(key));
+    var pos = this.getPosition(key);
     this.ring[pos] = nodeName;
   }
 };
@@ -55,7 +55,7 @@ ConsistentHashing.prototype.removeNode = function(nodeName) {
   // first, delete all replicas of node from the ring
   for (var i = 0; i < this.replicaCount; i++) {
     var key = nodeName + '-' + i;
-    var pos = this.getPosition(this.getHash(key));
+    var pos = this.getPosition(key);
 
     if (!this.ring.hasOwnProperty(pos)) {
       throw new Error('Node replica does not exist.');
@@ -74,12 +74,9 @@ ConsistentHashing.prototype.removeNode = function(nodeName) {
   delete this.nodes[nodeName];
 };
 
-ConsistentHashing.prototype.getPosition = function(hash) {
+ConsistentHashing.prototype.getPosition = function(key) {
+  var hash = crypto.createHash('sha1').update(key).digest('hex').substring(32);
   return (parseInt(hash, 16) % 10000000) / 10000000;
-};
-
-ConsistentHashing.prototype.getHash = function(key) {
-  return crypto.createHash('sha1').update(key).digest('hex').substring(32);
 };
 
 module.exports = ConsistentHashing;
